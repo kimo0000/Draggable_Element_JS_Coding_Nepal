@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable Element JS Coding Nepal</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/d575fe1d69.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>Draggable Div</header>
+      <div class="content">
+        <div class="icon">
+          <i class="fa-solid fa-up-down-left-right"></i>
+        </div>
+        <h3>Draggable Div</h3>
+        <p>
+          This is a draggable div which is created using HTML, CSS and
+          Javascript. You can move this div anuwhere on document or page.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const wrapper = document.querySelector(".wrapper"),
+        header = wrapper.querySelector("header");
+
+      function onDrag({ movementX, movementY }) {
+        // console.log(movementX, movementY);
+        let getStyle = getComputedStyle(wrapper);
+        let left = parseInt(getStyle.left);
+        let top = parseInt(getStyle.top);
+        // console.log(left + movementX, top + movementY);
+        wrapper.style.left = left + movementX + "px";
+        wrapper.style.top = top + movementY + "px";
+      }
+
+      header.addEventListener("mousedown", () => {
+        wrapper.classList.add("active");
+        header.addEventListener("mousemove", onDrag);
+      });
+
+      document.addEventListener("mouseup", () => {
+        wrapper.classList.remove("active");
+        header.removeEventListener("mousemove", onDrag);
+      });
+    </script>
+  </body>
+</html>
